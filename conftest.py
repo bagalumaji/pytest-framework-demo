@@ -10,4 +10,4 @@ def setup_and_teardown_browser(request):
     driver.implicitly_wait(10)
     request.cls.driver = driver
     yield
-    request.cls.driver.quit()
+    driver.quit()
