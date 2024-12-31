@@ -1,8 +1,13 @@
 import pytest
+from selenium import webdriver
 
 
-@pytest.fixture(autouse=True,scope="function")
-def global_setup_fixture():
-    print("global setup fixture - executed")
+@pytest.fixture()
+def setup_and_teardown_browser(request):
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get("https://tutorialsninja.com/demo/")
+    driver.implicitly_wait(10)
+    request.cls.driver = driver
     yield
-    print("global tear down")
+    request.cls.driver.quit()
