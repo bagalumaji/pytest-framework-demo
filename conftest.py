@@ -1,13 +1,16 @@
 import pytest
-from selenium import webdriver
+
+from driver.driver import Driver
 
 
 @pytest.fixture()
 def setup_and_teardown_browser(request):
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.get("https://tutorialsninja.com/demo/")
-    driver.implicitly_wait(10)
-    request.cls.driver = driver
+    browser_name = request.config.getoption('browser')
+    Driver.init_driver(browser_name)
     yield
-    driver.quit()
+    Driver.close_driver()
+
+
+def pytest_addoption(parser):
+    browser_name = "chrome"
+    parser.addoption("--browser", action="store", default=browser_name, help="provide browser name as - chrome, firefox...")
