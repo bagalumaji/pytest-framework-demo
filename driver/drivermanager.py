@@ -17,4 +17,4 @@ class DriverManager:
     @staticmethod
     def unload():
         if hasattr(DriverManager._thread_local_driver, "driver"):
-            del DriverManager._thread_local_driver
+            del DriverManager._thread_local_driver.driver
