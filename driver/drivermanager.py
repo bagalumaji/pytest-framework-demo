@@ -1,17 +1,20 @@
-from threading import Thread
+import threading
 
+from selenium.webdriver.ie.webdriver import WebDriver
 
 
 class DriverManager:
-    # _driver =
+    _thread_local_driver:WebDriver = threading.local()
+
     @staticmethod
     def get_driver():
-        pass
+        return getattr(DriverManager._thread_local_driver,"driver",None)
 
     @staticmethod
     def set_driver(driver):
-        pass
+        DriverManager._thread_local_driver.driver = driver
 
     @staticmethod
     def unload():
-        pass
+        if hasattr(DriverManager._thread_local_driver,"driver"):
+            del DriverManager._thread_local_driver
