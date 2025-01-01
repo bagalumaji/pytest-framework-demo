@@ -10,7 +10,7 @@ def setup_and_teardown_browser(request):
     browser_name = get_browser(request.config.getoption('browser'))
     Driver.init_driver(browser_name)
     yield
-    Driver.close_driver()
+    Driver.quit_driver()
 
 
 def pytest_addoption(parser):
