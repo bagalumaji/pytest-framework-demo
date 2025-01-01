@@ -12,7 +12,7 @@ class Driver:
             DriverManager.get_driver().get("https://tutorialsninja.com/demo/index.php")
 
     @staticmethod
-    def close_driver():
+    def quit_driver():
         if driver := DriverManager.get_driver():
             driver.quit()
             DriverManager.unload()
